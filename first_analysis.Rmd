@@ -1,0 +1,13 @@
+```{r}
+library(tidyverse)
+library(spotifyr)
+
+year_2008 <- get_playlist_audio_features("", "7HlA8Mo6Qmu0PnDTAy8KEx")
+year_2009 <- get_playlist_audio_features("", "4TZQdInyIBhEiVFD6th0pd")
+Innerspeaker <- get_playlist_audio_features("", "1AXmYpua1GLCYCabzoTNRU")
+Lonerism <- get_playlist_audio_features("", "6jMn2Al9SkT6Ego1EbRFJJ")
+
+Currents <- get_playlist_audio_features("", "63F20lxwhrbbvkwyD2Qh2u")
+The_Slow_Rush <- get_playlist_audio_features("", "54uQpagM8ye2V7Q2WBwvaA")
+```
+
