@@ -19,3 +19,19 @@ library(compmus)
 
 ***
 This is text 
+
+### This is a second headline
+
+```{r}
+Before_Currents <- get_playlist_audio_features("", "0zj7vBkFkrtkIy7bbiIDHT")
+After_Currents <- get_playlist_audio_features("", "2iF5St3YBr1AalBJFZK8uD")
+
+Categorical <- rbind(Before_Currents, After_Currents)
+
+Categorical |>
+  ggplot(aes(x = playlist_name, y = energy )) +
+  geom_violin()
+```
+
+*** 
+deze plot 
