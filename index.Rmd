@@ -2,7 +2,9 @@
 title: "The influence of popularity on Tame Impala"
 author: "Puck Voorham"
 date: "2023-02-21"
-output: html_document
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
 ---
 
 ```{r setup, include=FALSE}
