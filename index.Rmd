@@ -29,7 +29,7 @@ After_Currents <- get_playlist_audio_features("", "2iF5St3YBr1AalBJFZK8uD")
 Categorical <- rbind(Before_Currents, After_Currents)
 
 Categorical |>
-  ggplot(aes(x = playlist_name, y = energy )) +
+  ggplot(aes(x = playlist_name, y = danceability )) +
   geom_violin()
 ```
 
