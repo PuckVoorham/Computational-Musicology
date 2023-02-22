@@ -35,3 +35,21 @@ Categorical |>
 
 *** 
 deze plot 
+
+### This is a third headline
+
+```{r}
+scatter_plot <- ggplot(Categorical, aes(x = valence, y = energy, size = tempo, color = playlist_name)) +
+  geom_point() +
+  labs(
+    x = "Valence",
+    y = "Energy"
+  )
+
+scatter_plot
+
+```
+
+
+***
+deze plot is 
