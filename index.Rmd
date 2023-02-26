@@ -34,7 +34,8 @@ Categorical |>
 ```
 
 *** 
-In this first, relatively easy plot, we see 
+In this first, relatively simple plot, the music used in this corpus is divided into two categories. The left form includes all songs by Tame Impala up to the Currents album in 2015. The right concerns all songs from 2015 (including Currents) to the present. In this plot, these categories are set out on the y-axis in "danceability". The expectation here was that earlier songs, before the popular album currents, were less danceable. This was the expectation because these songs could be considered more like Tame-Impala's somewhat inaccessible, rougher psychedelic rock. In short; music that could be perceived as less danceable than the smooth, disco- and synthpop-influenced songs from currents and other later tracks. The plot does somewhat support this expectation. It can be seen that at least the "peak" in danceability of the songs before currents is lower than the peak of the songs after currents. There is also less variation seen in the second group. First, the songs barely seem to score below a score of 0.4 in danceability, confirming the hypothesis. On the other hand, a single/some songs do seem to score higher in danceability than the songs after currents. To find out what this is due to requires further analysis. It could be that the whole variation in the first category is significantly higher because this category contains more songs.  
+
 
 ### A second visualisation
 
