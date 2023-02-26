@@ -15,12 +15,12 @@ library(spotifyr)
 library(compmus)
 
 ```
-### This is a headline test
+### Introduction
 
 ***
 This is text 
 
-### This is a second headline
+### A first visualisation
 
 ```{r}
 Before_Currents <- get_playlist_audio_features("", "0zj7vBkFkrtkIy7bbiIDHT")
@@ -36,7 +36,7 @@ Categorical |>
 *** 
 deze plot 
 
-### This is a third headline
+### A second visualisation
 
 ```{r}
 scatter_plot <- ggplot(Categorical, aes(x = valence, y = energy, size = tempo, color = playlist_name)) +
@@ -86,3 +86,8 @@ Categorical |>
 
 *** 
 Does this work?
+
+### Conclusion
+
+***
+Here I would write my overall conclusions so far
