@@ -34,7 +34,7 @@ Categorical |>
 ```
 
 *** 
-deze plot 
+In this first, relatively easy plot, we see 
 
 ### A second visualisation
 
