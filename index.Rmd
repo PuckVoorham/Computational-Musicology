@@ -30,7 +30,13 @@ Categorical <- rbind(Before_Currents, After_Currents)
 
 Categorical |>
   ggplot(aes(x = playlist_name, y = danceability )) +
-  geom_violin()
+  geom_violin() + theme_minimal() +
+  theme(
+    text = element_text( color = "white"),
+    plot.subtitle = element_text(size = 12, color = "white"),
+    plot.background = element_rect(fill = "lightblue"),
+    plot.margin = unit(c(5, 10, 5, 10), units = "mm")
+  ) 
 ```
 
 *** 
@@ -45,7 +51,13 @@ scatter_plot <- ggplot(Categorical, aes(x = valence, y = energy, size = tempo, c
   labs(
     x = "Valence",
     y = "Energy"
-  )
+  ) + theme_minimal() +
+  theme(
+    text = element_text( color = "white"),
+    plot.subtitle = element_text(size = 12, color = "white"),
+    plot.background = element_rect(fill = "lightblue"),
+    plot.margin = unit(c(5, 10, 5, 10), units = "mm")
+  ) 
 
 scatter_plot
 
@@ -57,19 +69,19 @@ deze plot is
 
 
 
-### Chromatogram test
+### Chromagram test
 
 ```{r}
 
 Categorical <-
-  get_tidy_audio_analysis("6qi0vMwfN9qRh8wzrOyvp7") |>
+  get_tidy_audio_analysis("79chzfFIIq7cHkqcYYORk0") |>
   select(segments) |>
   unnest(segments) |>
   select(start, duration, pitches)
 
 
 Categorical |>
-  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) |>
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
   compmus_gather_chroma() |> 
   ggplot(
     aes(
@@ -82,6 +94,12 @@ Categorical |>
   geom_tile() +
   labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
+  theme(
+    text = element_text( color = "white"),
+    plot.subtitle = element_text(size = 12, color = "white"),
+    plot.background = element_rect(fill = "lightblue"),
+    plot.margin = unit(c(5, 10, 5, 10), units = "mm")
+  ) +
   scale_fill_viridis_c()
 ```
 
