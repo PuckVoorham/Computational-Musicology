@@ -56,9 +56,10 @@ Tame_Impala |>
   geom_violin() +
   scale_fill_viridis_d() +
   labs(x = "Spotify Timbre Coefficients", y = "", fill = "Genre")
-
 ``` 
-***
+
+
+*** 
 In this visualization, you can see a comparison between the two groups within my chosen corpus: However, there is less variation than I expected beforehand in terms of timbre values. However, the second value (which says something about the "strength" of the high frequencies is significantly different. I am going to delve further into what exactly this difference means and whether I can recognize it myself. 
 
 ### Chordogram 
