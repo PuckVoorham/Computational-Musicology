@@ -19,49 +19,40 @@ library(spotifyr)
 library(compmus)
 ```
 
-### Track level summary
+### Tempograms
+
+### Tempogram 1: elephant
 
 ```{r}
-Before_Currents <-
-  get_playlist_audio_features(
-  "", "0zj7vBkFkrtkIy7bbiIDHT"
-  ) |>
-  slice(1:30) |>
-  add_audio_analysis()
+elephant <- get_tidy_audio_analysis("6qZjm61s6u8Ead9sWxCDro")
+elephant |>
+  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) |>
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
 
-After_Currents <-
-  get_playlist_audio_features(
-  "", "2iF5St3YBr1AalBJFZK8uD"
-  ) |>
-  slice(1:30) |>
-  add_audio_analysis()
+```
 
-Tame_Impala <-
-  Before_Currents |>
-  mutate(genre = "Before currents") |>
-  bind_rows(After_Currents |> mutate(genre = "After currents"))
+### Tempogram 2: borderline
+```{r}
+elephant <- get_tidy_audio_analysis("5hM5arv9KDbCHS0k9uqwjr")
+elephant |>
+  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) |>
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
 
-Tame_Impala |>
-  mutate(
-    timbre =
-      map(
-        segments,
-        compmus_summarise,
-        timbre,
-        method = "mean"
-      )
-  ) |>
-  select(genre, timbre) |>
-  compmus_gather_timbre() |>
-  ggplot(aes(x = basis, y = value, fill = genre)) +
-  geom_violin() +
-  scale_fill_viridis_d() +
-  labs(x = "Spotify Timbre Coefficients", y = "", fill = "Genre")
-``` 
+```
 
+***
+(It didn't work putting the plots on the same page nor on the front page, I don't know why).
 
-*** 
-In this visualization, you can see a comparison between the two groups within my chosen corpus: However, there is less variation than I expected beforehand in terms of timbre values. However, the second value (which says something about the "strength" of the high frequencies is significantly different. I am going to delve further into what exactly this difference means and whether I can recognize it myself. 
+To analyze tempo, I used two typical songs from the different groups in my corpus. The first tempogram shows a number from before currents and the second shows one from after currents. It is interesting to note that the songs from before currents show more tempo changes than the songs after. Tempo changes could affect the extent to which a song can be considered accessible and danceable. The decrease in tempo changes in songs after currents could support the hypothesis. 
+
 
 ### Chordogram 
 ```{r}
@@ -191,12 +182,12 @@ The expectations I have at this moment are therefore that their earlier songs ca
 Songs that, in my opinion, typify both extremes in this are The Bold Arrow of Time from the album Innerspeaker (2010) as typical hard psychedelic rock versus The less I know the better from Currents (2015). Songs like Nangs and Gossip from that same album might be a bit off, as they could be better considered as ambient music and are hard to categorize in any of the aforementioned genres.
 
 ### A first visualisation
-
+,,
 ```{r}
 Before_Currents <- get_playlist_audio_features("", "0zj7vBkFkrtkIy7bbiIDHT")
-After_Currents <- get_playlist_audio_features("", "2iF5St3YBr1AalBJFZK8uD")
+Currents_and_later <- get_playlist_audio_features("", "2iF5St3YBr1AalBJFZK8uD")
 
-Categorical <- rbind(Before_Currents, After_Currents)
+Categorical <- rbind(Before_Currents, Currents_and_later)
 
 Categorical |>
   ggplot(aes(x = playlist_name, y = danceability, box = FALSE )) +
@@ -511,7 +502,10 @@ phf |>
 
 ```
 
-### Tempogram 
+### Tempograms
+
+### Tempogram 1: elephant
+
 ```{r}
 elephant <- get_tidy_audio_analysis("6qZjm61s6u8Ead9sWxCDro")
 elephant |>
@@ -522,10 +516,64 @@ elephant |>
   labs(x = "Time (s)", y = "Tempo (BPM)") +
   theme_classic()
 
+```
 
-
+### Tempogram 2: borderline
+```{r}
+elephant <- get_tidy_audio_analysis("5hM5arv9KDbCHS0k9uqwjr")
+elephant |>
+  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) |>
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
 
 ```
+
+### Track level summary
+
+```{r}
+Before_Currents <-
+  get_playlist_audio_features(
+  "", "0zj7vBkFkrtkIy7bbiIDHT"
+  ) |>
+  slice(1:30) |>
+  add_audio_analysis()
+
+After_Currents <-
+  get_playlist_audio_features(
+  "", "2iF5St3YBr1AalBJFZK8uD"
+  ) |>
+  slice(1:30) |>
+  add_audio_analysis()
+
+Tame_Impala <-
+  Before_Currents |>
+  mutate(genre = "Before currents") |>
+  bind_rows(After_Currents |> mutate(genre = "After currents"))
+
+Tame_Impala |>
+  mutate(
+    timbre =
+      map(
+        segments,
+        compmus_summarise,
+        timbre,
+        method = "mean"
+      )
+  ) |>
+  select(genre, timbre) |>
+  compmus_gather_timbre() |>
+  ggplot(aes(x = basis, y = value, fill = genre)) +
+  geom_violin() +
+  scale_fill_viridis_d() +
+  labs(x = "Spotify Timbre Coefficients", y = "", fill = "Genre")
+``` 
+
+
+*** 
+In this visualization, you can see a comparison between the two groups within my chosen corpus: However, there is less variation than I expected beforehand in terms of timbre values. However, the second value (which says something about the "strength" of the high frequencies is significantly different. I am going to delve further into what exactly this difference means and whether I can recognize it myself. 
 
 
 ### Conclusion
