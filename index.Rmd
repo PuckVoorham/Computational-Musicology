@@ -5,6 +5,7 @@ date: "2023-02-21"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
+    self_contained: false
     theme:
       version: 4
       bootswatch: minty
@@ -233,7 +234,7 @@ scatter_plot
 
 
 ***
-deze plot is 
+
 
 
 ### Chromagram test
@@ -510,6 +511,21 @@ phf |>
 
 ```
 
+### Tempogram 
+```{r}
+elephant <- get_tidy_audio_analysis("6qZjm61s6u8Ead9sWxCDro")
+elephant |>
+  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) |>
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
+
+
+
+
+```
 
 
 ### Conclusion
