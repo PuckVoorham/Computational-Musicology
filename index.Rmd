@@ -4,7 +4,6 @@ author: "Puck Voorham"
 date: "2023-02-21"
 output: 
   flexdashboard::flex_dashboard:
-    storyboard: true
     self_contained: false
     theme:
       version: 4
@@ -19,157 +18,12 @@ library(spotifyr)
 library(compmus)
 ```
 
-### Tempograms
 
-### Tempogram 1: elephant
+Introduction
+=====================================
 
-```{r}
-elephant <- get_tidy_audio_analysis("6qZjm61s6u8Ead9sWxCDro")
-elephant |>
-  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) |>
-  ggplot(aes(x = time, y = bpm, fill = power)) +
-  geom_raster() +
-  scale_fill_viridis_c(guide = "none") +
-  labs(x = "Time (s)", y = "Tempo (BPM)") +
-  theme_classic()
-
-```
-
-### Tempogram 2: borderline
-```{r}
-elephant <- get_tidy_audio_analysis("5hM5arv9KDbCHS0k9uqwjr")
-elephant |>
-  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) |>
-  ggplot(aes(x = time, y = bpm, fill = power)) +
-  geom_raster() +
-  scale_fill_viridis_c(guide = "none") +
-  labs(x = "Time (s)", y = "Tempo (BPM)") +
-  theme_classic()
-
-```
-
-***
-(It didn't work putting the plots on the same page nor on the front page, I don't know why).
-
-To analyze tempo, I used two typical songs from the different groups in my corpus. The first tempogram shows a number from before currents and the second shows one from after currents. It is interesting to note that the songs from before currents show more tempo changes than the songs after. Tempo changes could affect the extent to which a song can be considered accessible and danceable. The decrease in tempo changes in songs after currents could support the hypothesis. 
-
-
-### Chordogram 
-```{r}
-circshift <- function(v, n) {
-  if (n == 0) v else c(tail(v, n), head(v, -n))
-}
-
-#      C     C#    D     Eb    E     F     F#    G     Ab    A     Bb    B
-major_chord <-
-  c(   1,    0,    0,    0,    1,    0,    0,    1,    0,    0,    0,    0)
-minor_chord <-
-  c(   1,    0,    0,    1,    0,    0,    0,    1,    0,    0,    0,    0)
-seventh_chord <-
-  c(   1,    0,    0,    0,    1,    0,    0,    1,    0,    0,    1,    0)
-
-major_key <-
-  c(6.35, 2.23, 3.48, 2.33, 4.38, 4.09, 2.52, 5.19, 2.39, 3.66, 2.29, 2.88)
-minor_key <-
-  c(6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17)
-
-chord_templates <-
-  tribble(
-    ~name, ~template,
-    "Gb:7", circshift(seventh_chord, 6),
-    "Gb:maj", circshift(major_chord, 6),
-    "Bb:min", circshift(minor_chord, 10),
-    "Db:maj", circshift(major_chord, 1),
-    "F:min", circshift(minor_chord, 5),
-    "Ab:7", circshift(seventh_chord, 8),
-    "Ab:maj", circshift(major_chord, 8),
-    "C:min", circshift(minor_chord, 0),
-    "Eb:7", circshift(seventh_chord, 3),
-    "Eb:maj", circshift(major_chord, 3),
-    "G:min", circshift(minor_chord, 7),
-    "Bb:7", circshift(seventh_chord, 10),
-    "Bb:maj", circshift(major_chord, 10),
-    "D:min", circshift(minor_chord, 2),
-    "F:7", circshift(seventh_chord, 5),
-    "F:maj", circshift(major_chord, 5),
-    "A:min", circshift(minor_chord, 9),
-    "C:7", circshift(seventh_chord, 0),
-    "C:maj", circshift(major_chord, 0),
-    "E:min", circshift(minor_chord, 4),
-    "G:7", circshift(seventh_chord, 7),
-    "G:maj", circshift(major_chord, 7),
-    "B:min", circshift(minor_chord, 11),
-    "D:7", circshift(seventh_chord, 2),
-    "D:maj", circshift(major_chord, 2),
-    "F#:min", circshift(minor_chord, 6),
-    "A:7", circshift(seventh_chord, 9),
-    "A:maj", circshift(major_chord, 9),
-    "C#:min", circshift(minor_chord, 1),
-    "E:7", circshift(seventh_chord, 4),
-    "E:maj", circshift(major_chord, 4),
-    "G#:min", circshift(minor_chord, 8),
-    "B:7", circshift(seventh_chord, 11),
-    "B:maj", circshift(major_chord, 11),
-    "D#:min", circshift(minor_chord, 3)
-  )
-
-key_templates <-
-  tribble(
-    ~name, ~template,
-    "Gb:maj", circshift(major_key, 6),
-    "Bb:min", circshift(minor_key, 10),
-    "Db:maj", circshift(major_key, 1),
-    "F:min", circshift(minor_key, 5),
-    "Ab:maj", circshift(major_key, 8),
-    "C:min", circshift(minor_key, 0),
-    "Eb:maj", circshift(major_key, 3),
-    "G:min", circshift(minor_key, 7),
-    "Bb:maj", circshift(major_key, 10),
-    "D:min", circshift(minor_key, 2),
-    "F:maj", circshift(major_key, 5),
-    "A:min", circshift(minor_key, 9),
-    "C:maj", circshift(major_key, 0),
-    "E:min", circshift(minor_key, 4),
-    "G:maj", circshift(major_key, 7),
-    "B:min", circshift(minor_key, 11),
-    "D:maj", circshift(major_key, 2),
-    "F#:min", circshift(minor_key, 6),
-    "A:maj", circshift(major_key, 9),
-    "C#:min", circshift(minor_key, 1),
-    "E:maj", circshift(major_key, 4),
-    "G#:min", circshift(minor_key, 8),
-    "B:maj", circshift(major_key, 11),
-    "D#:min", circshift(minor_key, 3)
-  )
-
-phf <-
-  get_tidy_audio_analysis("1KcOU0q9AMXV9xi4tSzzCc") |>
-  compmus_align(sections, segments) |>
-  select(sections) |>
-  unnest(sections) |>
-  mutate(
-    pitches =
-      map(segments,
-          compmus_summarise, pitches,
-          method = "mean", norm = "manhattan"
-      )
-  )
-
-phf |> 
-  compmus_match_pitch_template(
-    chord_templates,         # Change to chord_templates if desired
-    method = "manhattan",  # Try different distance metrics
-    norm = "manhattan"     # Try different norms
-  ) |>
-  ggplot(
-    aes(x = start + duration / 2, width = duration, y = name, fill = d)
-  ) +
-  geom_tile() +
-  scale_fill_viridis_c(guide = "none") +
-  theme_minimal() +
-  labs(x = "Time (s)", y = "")
-```
-
+Column {data-width=500}
+-------------------------------------
 
 ### Does the genre of a major music phenomenon like Tame Impala change due to popularity?
 
@@ -181,8 +35,18 @@ The expectations I have at this moment are therefore that their earlier songs ca
 
 Songs that, in my opinion, typify both extremes in this are The Bold Arrow of Time from the album Innerspeaker (2010) as typical hard psychedelic rock versus The less I know the better from Currents (2015). Songs like Nangs and Gossip from that same album might be a bit off, as they could be better considered as ambient music and are hard to categorize in any of the aforementioned genres.
 
+Column {data-width=500}
+-------------------------------------
+
+### TATATATAT
+
+tetetetetete
+
+Visualisations {.storyboard}
+=====================================
+
 ### A first visualisation
-,,
+
 ```{r}
 Before_Currents <- get_playlist_audio_features("", "0zj7vBkFkrtkIy7bbiIDHT")
 Currents_and_later <- get_playlist_audio_features("", "2iF5St3YBr1AalBJFZK8uD")
@@ -199,7 +63,8 @@ Categorical |>
   ) 
 ```
 
-*** 
+---
+
 In this first, relatively simple plot, the music used in this corpus is divided into two categories. The left form includes all songs by Tame Impala up to the Currents album in 2015. The right concerns all songs from 2015 (including Currents) to the present. In this plot, these categories are set out on the y-axis in "danceability". The expectation here was that earlier songs, before the popular album currents, were less danceable. This was the expectation because these songs could be considered more like Tame-Impala's somewhat inaccessible, rougher psychedelic rock. In short; music that could be perceived as less danceable than the smooth, disco- and synthpop-influenced songs from currents and other later tracks. The plot does somewhat support this expectation. It can be seen that at least the "peak" in danceability of the songs before currents is lower than the peak of the songs after currents. There is also less variation seen in the second group. First, the songs barely seem to score below a score of 0.4 in danceability, confirming the hypothesis. On the other hand, a single/some songs do seem to score higher in danceability than the songs after currents. To find out what this is due to requires further analysis. It could be that the whole variation in the first category is significantly higher because this category contains more songs.  
 
 
@@ -223,12 +88,22 @@ scatter_plot
 
 ```
 
+---
 
-***
+hfkhkanjbgkbnsjkBajkjv
 
+Chromagrammmmmmm
+=====================================
 
+Column {data-width=500}
+-------------------------------------
 
-### Chromagram test
+Here is a chromagram of the song Lost in Yesterday. In this song from Tame Impala's latest album, there are clear characteristics of disco, synth-pop and funk in addition to psychedelic influences. 
+
+Column {data-width=500}
+-------------------------------------
+
+### Chromagram 1
 
 ```{r}
 
@@ -262,11 +137,7 @@ Categorical |>
   scale_fill_viridis_c()
 ```
 
-
-*** 
-Here is a chromagram of the song Lost in Yesterday. In this song from Tame Impala's latest album, there are clear characteristics of disco, synth-pop and funk in addition to psychedelic influences. 
-
-### Chromagram test
+### Chromagram 2 
 
 ```{r}
 
@@ -300,34 +171,22 @@ Categorical |>
   scale_fill_viridis_c()
 ```
 
-*** 
-Does this work?
+Ceptrogram
+=====================================
 
+Column {data-width=500}
+-------------------------------------
+
+hfsghKZg
+
+Column {data-width=500}
+-------------------------------------
 
 ### Ceptrogram
 ```{r}
-elephant <-
-  get_tidy_audio_analysis("6qZjm61s6u8Ead9sWxCDro") |> # Change URI.
-  compmus_align(beats, segments) |>                     # Change `bars`
-  select(beats) |>                                      #   in all three
-  unnest(beats) |>                                      #   of these lines.
-  mutate(
-    pitches =
-      map(segments,
-        compmus_summarise, pitches,
-        method = "rms", norm = "euclidean"              # Change summary & norm.
-      )
-  ) |>
-  mutate(
-    timbre =
-      map(segments,
-        compmus_summarise, timbre,
-        method = "rms", norm = "euclidean"              # Change summary & norm.
-      )
-  )
+elephant_ceptrogram <- readRDS(file = "data/elephant_ceptrogram (Ceptrogram).RDS")
 
-elephant |>
-  compmus_gather_timbre() |>
+elephant_ceptrogram |>
   ggplot(
     aes(
       x = start + duration / 2,
@@ -338,14 +197,24 @@ elephant |>
   ) +
   geom_tile() +
   labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  scale_fill_viridis_c() +                              
+  scale_fill_viridis_c() +
   theme_classic()
 ```
 
+SSM
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+
+hfsghKZg
+
+Column {data-width=500}
+-------------------------------------
 
 ### Self similarity matrix: ceptogram
 
-```{r}
+```{r self similarity matrix}
 phf <-
   get_tidy_audio_analysis("1KcOU0q9AMXV9xi4tSzzCc") |> # Change URI.
   compmus_align(bars, segments) |>                     # Change `bars`
@@ -366,7 +235,7 @@ phf <-
       )
   )
 
-elephant |>
+phf |>
   compmus_self_similarity(timbre, "cosine") |> 
   ggplot(
     aes(
@@ -384,6 +253,57 @@ elephant |>
   labs(x = "", y = "")
 ```
 
+Tempograms
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+    
+### Tempo shifts as an indication of (in)accessibility of music 
+    
+To analyze tempo, I used two typical songs from the different groups in my corpus. The first tempogram shows a number from before currents and the second shows one from after currents. It is interesting to note that the songs from before currents show more tempo changes than the songs after. Tempo changes could affect the extent to which a song can be considered accessible and danceable. The decrease in tempo changes in songs after currents could support the hypothesis. 
+   
+Column {data-width=500}
+-------------------------------------
+
+### Tempogram 1: elephant
+
+```{r}
+elephant_cyclic <- readRDS(file = "data/elephant_cyclic (Tempogram).RDS")
+
+elephant_cyclic |>
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
+```
+
+### Tempogram 2: borderline
+```{r}
+borderline_cyclic <- readRDS(file = "data/borderline_cyclic (Tempogram).RDS")
+
+borderline_cyclic |>
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
+
+```
+
+Chordograms
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+
+### Text
+
+hshhss
+
+Column {data-width=500}
+-------------------------------------
 
 ### Chordogram 
 ```{r}
@@ -499,41 +419,22 @@ phf |>
   scale_fill_viridis_c(guide = "none") +
   theme_minimal() +
   labs(x = "Time (s)", y = "")
-
 ```
 
-### Tempograms
 
-### Tempogram 1: elephant
+SUMMM
+=====================================
 
-```{r}
-elephant <- get_tidy_audio_analysis("6qZjm61s6u8Ead9sWxCDro")
-elephant |>
-  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) |>
-  ggplot(aes(x = time, y = bpm, fill = power)) +
-  geom_raster() +
-  scale_fill_viridis_c(guide = "none") +
-  labs(x = "Time (s)", y = "Tempo (BPM)") +
-  theme_classic()
+Column {data-width=500}
+-------------------------------------
 
-```
+In this visualization, you can see a comparison between the two groups within my chosen corpus: However, there is less variation than I expected beforehand in terms of timbre values. However, the second value (which says something about the "strength" of the high frequencies is significantly different. I am going to delve further into what exactly this difference means and whether I can recognize it myself. 
 
-### Tempogram 2: borderline
-```{r}
-elephant <- get_tidy_audio_analysis("5hM5arv9KDbCHS0k9uqwjr")
-elephant |>
-  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) |>
-  ggplot(aes(x = time, y = bpm, fill = power)) +
-  geom_raster() +
-  scale_fill_viridis_c(guide = "none") +
-  labs(x = "Time (s)", y = "Tempo (BPM)") +
-  theme_classic()
-
-```
+Column {data-width=500}
+-------------------------------------
 
 ### Track level summary
 
-```{r}
 Before_Currents <-
   get_playlist_audio_features(
   "", "0zj7vBkFkrtkIy7bbiIDHT"
@@ -569,16 +470,16 @@ Tame_Impala |>
   geom_violin() +
   scale_fill_viridis_d() +
   labs(x = "Spotify Timbre Coefficients", y = "", fill = "Genre")
-``` 
 
 
-*** 
-In this visualization, you can see a comparison between the two groups within my chosen corpus: However, there is less variation than I expected beforehand in terms of timbre values. However, the second value (which says something about the "strength" of the high frequencies is significantly different. I am going to delve further into what exactly this difference means and whether I can recognize it myself. 
+Conclusion
+=====================================
 
+Column {data-width=1000}
+-------------------------------------
 
 ### Conclusion
 
-***
 Here I would write my overall conclusions so far
 
 
