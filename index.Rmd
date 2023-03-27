@@ -30,7 +30,7 @@ Dendrogram
 Column {data-width=500}
 -------------------------------------
 
-hfsghKZg
+The dendrogram on the right you see a clustering analysis, in which I have divided my corpus into the two groups to be compared; songs from before currents and these from currents and after. The idea was to see to what extent in this analysis a separation could be seen between these two groups. Here and there we see some "correctly" clustered numbers; these are from the same corpus group (and often album, as in the middle blue chunk of numbers). Yet they are also occasionally mixed together. Nangs is a definite outlier, but this was to be expected. This song is the only one that is completely instrumental and can be classified more under "ambient" music rather than indie rock. Still, I wouldn't know exactly why, for example, "sundown syndrome" and "eventually" are clustered so closely together. I might change my clustering method to see if this has any influence. 
 
 Column {data-width=500}
 -------------------------------------
@@ -467,7 +467,7 @@ phf |>
 ```
 
 
-SUMMM
+SUM
 =====================================
 
 Column {data-width=500}
