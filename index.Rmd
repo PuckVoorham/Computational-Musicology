@@ -16,7 +16,52 @@ library(tidyverse)
 library(plotly)
 library(spotifyr)
 library(compmus)
+library(tidymodels)
+library(ggdendro)
+library(heatmaply)
+library(compmus)
+
 ```
+
+
+Dendrogram
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+
+hfsghKZg
+
+Column {data-width=500}
+-------------------------------------
+
+### Dendrogram
+```{r}
+data_for_tame_impala_clustering <- readRDS(file = "data/tame_impala_dendrogram (Dendrogram).RDS")
+
+
+data_for_tame_impala_clustering |>
+  ggdendrogram() +
+  geom_text(data = label(data_for_tame_impala_clustering),aes(x, y,
+                                                         label=label,
+                                                         hjust=0,
+                                                         colour=playlist_name), size=3) +
+  coord_flip() +
+  scale_y_reverse(expand=c(0.2, 0)) +
+  theme(axis.line.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.title.y=element_blank(),
+        panel.background=element_rect(fill="white"),
+        panel.grid=element_blank()) +
+  labs(title = "Playlist Clustering") +
+  guides(
+    colour = guide_legend(
+      title = "Playlist"
+    )
+  )
+```
+
 
 
 Introduction
@@ -259,7 +304,7 @@ Tempograms
 Column {data-width=500}
 -------------------------------------
     
-### Tempo shifts as an indication of (in)accessibility of music 
+### Tempo shifts as an indication of accessibility of music 
     
 To analyze tempo, I used two typical songs from the different groups in my corpus. The first tempogram shows a number from before currents and the second shows one from after currents. It is interesting to note that the songs from before currents show more tempo changes than the songs after. Tempo changes could affect the extent to which a song can be considered accessible and danceable. The decrease in tempo changes in songs after currents could support the hypothesis. 
    

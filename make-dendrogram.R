@@ -65,13 +65,13 @@ tame_impala_juice <-
       instrumentalness +
       liveness +
       valence +
-      tempo,
+      tempo +
       #duration +
       # + `C#|Db` + D + `D#|Eb` +
       #E + `F` + `F#|Gb` + G +
       #G#|Ab` + A + `A#|Bb` + B +
-      #c01 + c02 + c03 + c04 + c05 + c06 +
-      #c07 + c08 + c09 + c10 + c11 + c12,
+      c01 + c02 + c03 + c04 + c05 + c06 +
+      c07 + c08 + c09 + c10 + c11 + c12,
     data = tame_impala_complete
   ) |>
   step_center(all_predictors()) |>
@@ -101,8 +101,6 @@ data_for_tame_impala_clustering$labels <- data_for_tame_impala_clustering$labels
 
 # Add factor so can use colouring!
 data_for_tame_impala_clustering$labels$label <- factor(data_for_tame_impala_clustering$labels$label)
-
-saveRDS(object = data_for_tame_impala_clustering, file = "data/tame_impala_dendrogram (Dendrogram).RDS")
 
 data_for_tame_impala_clustering |>
   ggdendrogram() +
