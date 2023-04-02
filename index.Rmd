@@ -13,6 +13,7 @@ output:
 ```{r, echo=FALSE}
 
 library(tidyverse)
+library(ggplot2)
 library(plotly)
 library(spotifyr)
 library(compmus)
@@ -20,9 +21,16 @@ library(tidymodels)
 library(ggdendro)
 library(heatmaply)
 library(compmus)
+library(viridisLite)
 
 
-soft_blue <- colorRampPalette(c("#00FF33", "#00FF66" , "#00FF99", "#00FFCC", "#00CC99"))(100)
+my_palette <- viridis_pal(option = "viridis")(10)
+
+
+# my_palette <- colorRampPalette(brewer.pal(8, "Dark2")[c(2,4,6,8,1)])
+# my_colors <- my_palette(5)
+
+#my_palette <- colorRampPalette(c("#000033", "#9933CC", "#FF00FF", "#FF3333", "#FFFF00"))(100)
 
 
 ```
@@ -116,14 +124,14 @@ Column {data-width=500}
 
 ```{r}
 
-Categorical <-
+lost_in_yesterday <-
   get_tidy_audio_analysis("5JWPUEov2wlX7c0jhYZpeB") |>
   select(segments) |>
   unnest(segments) |>
   select(start, duration, pitches)
 
 
-Categorical |>
+chromagram_1 <- lost_in_yesterday |>
   mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
   compmus_gather_chroma() |> 
   ggplot(
@@ -134,31 +142,40 @@ Categorical |>
       fill = value
     )
   ) +
+  
   geom_tile() +
-  ggtitle("Chromagram: Lost In Yesterday'") +
+  ggtitle("Chromagram: Lost In Yesterday") +
+  scale_fill_gradientn(colors = my_palette) +
   labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  theme_minimal() +
-    theme(
-    text = element_text( color = "black"),
-    plot.subtitle = element_text(size = 12, color = "black"),
-    #plot.background = element_rect(fill = "white"),
-    plot.margin = unit(c(5, 10, 5, 10), units = "mm")
-  ) +
-  scale_fill_viridis_c()
+  theme_minimal() + 
+  scale_color_gradientn(colors = my_palette)
+  ggplotly(chromagram_1, tooltip = "none", source = "none")
+  
+  # geom_tile() +
+  # ggtitle("Chromagram: Lost In Yesterday'") +
+  # labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  # theme_minimal() +
+  #   theme(
+  #   text = element_text( color = "black"),
+  #   plot.subtitle = element_text(size = 12, color = "black"),
+  #   #plot.background = element_rect(fill = "white"),
+  #   plot.margin = unit(c(5, 10, 5, 10), units = "mm")
+  # ) +
+  # scale_fill_viridis_c()
 ```
 
 ### Chromagram 2 
 
 ```{r}
 
-Categorical <-
-  get_tidy_audio_analysis("79chzfFIIq7cHkqcYYORk0") |>
+the_bold_arrow_of_time <-
+  get_tidy_audio_analysis("7r7yAFxq6CwakQB5NrJskh") |>
   select(segments) |>
   unnest(segments) |>
   select(start, duration, pitches)
 
 
-Categorical |>
+chromagram_2 <- the_bold_arrow_of_time |>
   mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
   compmus_gather_chroma() |> 
   ggplot(
@@ -169,16 +186,26 @@ Categorical |>
       fill = value
     )
   ) +
+  
+
   geom_tile() +
+  ggtitle("Chromagram: The Bold Arrow Of Time") + 
+  scale_fill_gradientn(colors = my_palette) +
   labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  theme_minimal() +
-  theme(
-    text = element_text( color = "black"),
-    plot.subtitle = element_text(size = 12, color = "black"),
-    #plot.background = element_rect(fill = "lightblue"),
-    plot.margin = unit(c(5, 10, 5, 10), units = "mm")
-  ) +
-  scale_fill_viridis_c()
+  theme_minimal() + 
+  scale_color_gradientn(colors = my_palette)
+  ggplotly(chromagram_2, tooltip = "none", source = "none")
+  
+  # geom_tile() +
+  # labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  # theme_minimal() +
+  # theme(
+  #   text = element_text( color = "black"),
+  #   plot.subtitle = element_text(size = 12, color = "black"),
+  #   #plot.background = element_rect(fill = "lightblue"),
+  #   plot.margin = unit(c(5, 10, 5, 10), units = "mm")
+  # ) +
+  # scale_fill_viridis_c()
 ```
 
 Ceptrogram
