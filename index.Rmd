@@ -52,18 +52,18 @@ Column {data-width=200}
 
 ### Corpus group 1: Songs before "Currents" 
 
-```{r}
-#<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0zj7vBkFkrtkIy7bbiIDHT?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-```
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0zj7vBkFkrtkIy7bbiIDHT?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
 
 
 Column {data-width=200}
 -------------------------------------
 
 ### Corpus group 2: Songs from "Currents" and later
-```{r}
-#<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2iF5St3YBr1AalBJFZK8uD?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-```
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2iF5St3YBr1AalBJFZK8uD?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
 
 A first impression {.storyboard}
 =====================================
@@ -134,23 +134,20 @@ If we then zoom in a bit more on this danceability, we might find something inte
 ### Loudness as a second important characteristic
 
 ```{r}
-scatter_plot <- ggplot(Categorical, aes(x = valence, y = energy, size = tempo, color = playlist_name)) +
-  geom_point() +
-  labs(
-    x = "Valence",
-    y = "Energy"
-  ) + theme_minimal() +
-  theme(
-    text = element_text( color = "black"),
-    plot.subtitle = element_text(size = 12, color = "black"),
-    #plot.background = element_rect(fill = "lightblue"),
-    plot.margin = unit(c(5, 10, 5, 10), units = "mm")
-  ) 
-
-scatter_plot
-
+plot_ly() %>%
+  add_trace(data = Before_Currents, x = ~loudness, type = "histogram", 
+            histnorm = "probabilty density", name = "Before Currents", 
+            marker = list(color = "#9900cc", opacity = 0.3)) %>%
+  add_trace(data = Currents_and_later, x = ~loudness, type = "histogram", 
+            histnorm = "probabilty density", name = "Currents And Later", 
+            marker = list(color = "#009999", opacity = 0.3))%>%
+  layout(xaxis = list(title = "Loudness"), yaxis = list(title = "Density"),
+         title = "Loudness",
+         showlegend = TRUE,
+         legend = list(title = "", orientation = "h"))
 ```
 
+("#9900cc", "#009999"
 
 
 ---
