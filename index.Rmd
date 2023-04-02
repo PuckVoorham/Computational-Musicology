@@ -27,12 +27,6 @@ library(viridisLite)
 my_palette <- viridis_pal(option = "viridis")(10)
 
 
-# my_palette <- colorRampPalette(brewer.pal(8, "Dark2")[c(2,4,6,8,1)])
-# my_colors <- my_palette(5)
-
-#my_palette <- colorRampPalette(c("#000033", "#9933CC", "#FF00FF", "#FF3333", "#FFFF00"))(100)
-
-
 ```
 
 
@@ -46,11 +40,12 @@ Column {data-width=700}
 
 Tame Impala is a famous musical project led by Kevin Parker, mostly known for its psychedelic rock. With the 2015 album Currents, it made its breakthrough to the greater public and has continued to grow in listeners over the past few years. Interestingly, best-known songs from the exploded album are quite "mild" by psychedelic-rock standards. Since this somewhat softer version of the genre seems to be doing well, I am curious to what extent a music phenomenon like Tame Impala, in genre 'adapts' after success, relative to their earlier songs. Do they make what the general public wants to hear, or do they maintain their authentic style for a smaller group of psychedelic-rock fanatics?
 
-The groups I want to compare within this corpus will be, first, the first singles from 2008 and 2009, the first album Innerspeaker from 2010 and Lonerism from 2013. To the second group I want to name all the songs after Currents (2015). The album on which they broke through (Currents) I want to assess herein separately by genre.
+The groups I want to compare within this corpus will be, first, the first singles from 2008 and 2009, the first album Innerspeaker from 2010 and Lonerism from 2013. The second group includes all the songs from the album Currents, with which they broke through, until now.  
 
 The expectations I have at this moment are therefore that their earlier songs can be considered as harder, rougher, up-tempo and less "accessible" psychedelic rock, while the songs from Currents and thus everything that followed fit better within the genres alternative/indie and (synth)pop.
 
 Songs that, in my opinion, typify both extremes in this are The Bold Arrow of Time from the album Innerspeaker (2010) as typical hard psychedelic rock versus The less I know the better from Currents (2015). Songs like Nangs and Gossip from that same album might be a bit off, as they could be better considered as ambient music and are hard to categorize in any of the aforementioned genres.
+
 
 Column {data-width=200}
 -------------------------------------
@@ -96,6 +91,17 @@ labs(x = "Danceability", y = "Energy", size = "Loudness", color = "Corpus Group"
 
 ```
 
+---
+
+To get a first impression of the information we could extract from the corpus using the spotify API, it is important to know which characteristic features are useful to compare.
+
+This is important because the corpus groups are not "totally" different; we are looking for certain characteristics in which to distinguish them. I have therefore chosen to focus on where "psychedelic rock" is fundamentally different from "pop". I chose these two genres because, based on chosic, the first corpus group leaned more toward the first genre (psychedelic rock) and the second corpus group showed more characteristics of pop. 
+
+Danceability, volume and energy seem to be the characteristics on which the above genres differ most. Pop is generally more danceable, but has a lower volume than psychedelic rock (this volume is mainly created in instrumental interludes). With this, the overall energy of psychedelic rock songs is also higher on average (Adorno, Theodor W., (1942) "On Popular Music", Institute of Social Research), (Pete Prown; Harvey P. Newquist (1997). Legends of Rock Guitar: The Essential Reference of Rock's Greatest Guitarists. Hal Leonard Corporation).
+
+This first plot reflects these three characteristics. From this visualization we can conclude a number of things. One property in which the clearest difference can be seen between the two groups is "loudness"; the songs from before currents are clearly louder on average than those after, as the literature led us to expect. In energy, we also see this very slightly. A similar subtle confirmation of expectation can be seen in danceability, which seems to be slightly higher for the newer songs. Still, we can hardly call this a significant result. 
+
+
 ### Danceability as a first key factor
 
 ```{r}
@@ -122,7 +128,7 @@ Categorical |>
 
 ---
 
-In this plot, the music used in this corpus is divided into two categories. The left form includes all songs by Tame Impala up to the Currents album in 2015. The right concerns all songs from 2015 (including Currents) to the present. In this plot, these categories are set out on the y-axis in "danceability". The expectation here was that earlier songs, before the popular album currents, were less danceable. This was the expectation because these songs could be considered more like Tame-Impala's somewhat inaccessible, rougher psychedelic rock. In short; music that could be perceived as less danceable than the smooth, disco- and synthpop-influenced songs from currents and other later tracks. The plot does somewhat support this expectation. It can be seen that at least the "peak" in danceability of the songs before currents is lower than the peak of the songs after currents. There is also less variation seen in the second group. First, the songs barely seem to score below a score of 0.4 in danceability, confirming the hypothesis. On the other hand, a single/some songs do seem to score higher in danceability than the songs after currents. To find out what this is due to requires further analysis. It could be that the whole variation in the first category is significantly higher because this category contains more songs.  
+If we then zoom in a bit more on this danceability, we might find something interesting after all. Indeed, the average seems quite similar, but the range of danceability is clearly much more diverse than Tame Impala's later songs. It can be seen that at least the "peak" in danceability of the songs before currents is lower than the peak of the songs after currents. There is also less variation seen in the second group. First, the songs barely seem to score below a score of 0.4 in danceability, confirming the hypothesis. On the other hand, a single/some songs do seem to score higher in danceability than the songs after currents. Still, the possibility that the wider range is caused by uber-more songs in the first corpus group should not be overlooked. 
 
 
 ### Loudness as a second important characteristic
