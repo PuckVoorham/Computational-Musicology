@@ -147,8 +147,6 @@ plot_ly() %>%
          legend = list(title = "", orientation = "h"))
 ```
 
-("#9900cc", "#009999"
-
 
 ---
 
@@ -158,6 +156,14 @@ hfkhkanjbgkbnsjkBajkjv
 ### Energy as a third major indicator
 
 ```{r}
+
+Energy <-
+  ggplot(Categorical, aes(x = energy, colour = "lightblue")) +
+  geom_histogram(binwidth = 0.1) +
+  facet_wrap(~playlist_name, scales = "free_x") + theme(legend.position = "none", 
+  plot.title = element_text(hjust = 0.5), panel.spacing = unit(1, "lines")) + labs(title = "Energy per corpus group") +
+  xlim(0, 1) 
+Energy
 
 ```
 
