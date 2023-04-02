@@ -97,9 +97,9 @@ To get a first impression of the information we could extract from the corpus us
 
 This is important because the corpus groups are not "totally" different; we are looking for certain characteristics in which to distinguish them. I have therefore chosen to focus on where "psychedelic rock" is fundamentally different from "pop". I chose these two genres because, based on chosic, the first corpus group leaned more toward the first genre (psychedelic rock) and the second corpus group showed more characteristics of pop. 
 
-Danceability, volume and energy seem to be the characteristics on which the above genres differ most. Pop is generally more danceable, but has a lower volume than psychedelic rock (this volume is mainly created in instrumental interludes). With this, the overall energy of psychedelic rock songs is also higher on average (Adorno, Theodor W., (1942) "On Popular Music", Institute of Social Research), (Pete Prown; Harvey P. Newquist (1997). Legends of Rock Guitar: The Essential Reference of Rock's Greatest Guitarists. Hal Leonard Corporation).
+Danceability, and energy seem to be the characteristics on which the above genres differ most. Pop is generally more danceable, but has a lower energy  than psychedelic rock (this energy is mainly created in instrumental interludes). With this, I would suspect that the overall volume (loudness) of psychedelic rock songs is also higher on average (Adorno, Theodor W., (1942) "On Popular Music", Institute of Social Research), (Pete Prown; Harvey P. Newquist (1997). Legends of Rock Guitar: The Essential Reference of Rock's Greatest Guitarists. Hal Leonard Corporation).
 
-This first plot reflects these three characteristics. From this visualization we can conclude a number of things. One property in which the clearest difference can be seen between the two groups is "loudness"; the songs from before currents are clearly louder on average than those after, as the literature led us to expect. In energy, we also see this very slightly. A similar subtle confirmation of expectation can be seen in danceability, which seems to be slightly higher for the newer songs. Still, we can hardly call this a significant result. 
+This first plot reflects these three characteristics. From this visualization we can conclude a number of things. One property in which the clearest difference can be seen between the two groups is "loudness"; the songs from before seem louder on average than those after, as the literature led us to expect. In energy, we also see this very slightly. A similar subtle confirmation of expectation can be seen in danceability, which seems to be slightly higher for the newer songs. Still, we can hardly call this a significant result. 
 
 
 ### Danceability as a first key factor
@@ -130,8 +130,25 @@ Categorical |>
 
 If we then zoom in a bit more on this danceability, we might find something interesting after all. Indeed, the average seems quite similar, but the range of danceability is clearly much more diverse than Tame Impala's later songs. It can be seen that at least the "peak" in danceability of the songs before currents is lower than the peak of the songs after currents. There is also less variation seen in the second group. First, the songs barely seem to score below a score of 0.4 in danceability, confirming the hypothesis. On the other hand, a single/some songs do seem to score higher in danceability than the songs after currents. Still, the possibility that the wider range is caused by uber-more songs in the first corpus group should not be overlooked. 
 
+### Energy as a second major indicator
 
-### Loudness as a second important characteristic
+```{r}
+
+Energy <-
+  ggplot(Categorical, aes(x = energy, colour = "lightblue")) +
+  geom_histogram(binwidth = 0.1) +
+  facet_wrap(~playlist_name, scales = "free_x") + theme(legend.position = "none", 
+  plot.title = element_text(hjust = 0.5), panel.spacing = unit(1, "lines")) + labs(title = "Energy per corpus group") +
+  xlim(0, 1) 
+Energy
+
+```
+
+---
+
+
+
+### Loudness as a third important characteristic
 
 ```{r}
 plot_ly() %>%
@@ -152,22 +169,6 @@ plot_ly() %>%
 
 hfkhkanjbgkbnsjkBajkjv
 
-
-### Energy as a third major indicator
-
-```{r}
-
-Energy <-
-  ggplot(Categorical, aes(x = energy, colour = "lightblue")) +
-  geom_histogram(binwidth = 0.1) +
-  facet_wrap(~playlist_name, scales = "free_x") + theme(legend.position = "none", 
-  plot.title = element_text(hjust = 0.5), panel.spacing = unit(1, "lines")) + labs(title = "Energy per corpus group") +
-  xlim(0, 1) 
-Energy
-
-```
-
----
 
 
 Chromagrams
