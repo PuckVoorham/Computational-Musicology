@@ -1,7 +1,7 @@
 ---
-title: "The influence of popularity on Tame Impala"
+title: "The influence of popularity on Tame Impala  |"
 author: "Puck Voorham"
-date: "2023-02-21"
+date: ""
 output: 
   flexdashboard::flex_dashboard:
     self_contained: false
@@ -22,47 +22,6 @@ library(heatmaply)
 library(compmus)
 
 ```
-
-
-Dendrogram
-=====================================
-
-Column {data-width=350}
--------------------------------------
-
-in the dendrogram on the right you see a clustering analysis, in which I have divided my corpus into the two groups to be compared; songs from before currents and these from currents and after. The idea was to see to what extent in this analysis a separation could be seen between these two groups. Here and there we see some "correctly" clustered numbers; these are from the same corpus group (and often album, as in the middle blue chunk of numbers). Yet they are also occasionally mixed together. Nangs is a definite outlier, but this was to be expected. This song is the only one that is completely instrumental and can be classified more under "ambient" music rather than indie rock. Still, I wouldn't know exactly why, for example, "sundown syndrome" and "eventually" are clustered so closely together. I might change my clustering method to see if this has any influence. 
-
-Column {data-width=650}
--------------------------------------
-
-### Dendrogram
-```{r}
-data_for_tame_impala_clustering <- readRDS(file = "data/tame_impala_dendrogram (Dendrogram).RDS")
-
-
-data_for_tame_impala_clustering |>
-  ggdendrogram() +
-  geom_text(data = label(data_for_tame_impala_clustering),aes(x, y,
-                                                         label=label,
-                                                         hjust=0,
-                                                         colour=playlist_name), size=3) +
-  coord_flip() +
-  scale_y_reverse(expand=c(0.2, 0)) +
-  theme(axis.line.y=element_blank(),
-        axis.ticks.y=element_blank(),
-        axis.text.y=element_blank(),
-        axis.title.y=element_blank(),
-        panel.background=element_rect(fill="white"),
-        panel.grid=element_blank()) +
-  labs(title = "Playlist Clustering") +
-  guides(
-    colour = guide_legend(
-      title = "Playlist"
-    )
-  )
-```
-
-
 
 Introduction
 =====================================
@@ -252,7 +211,7 @@ SSM
 Column {data-width=500}
 -------------------------------------
 
-hfsghKZg
+posthumous forgiveness 
 
 Column {data-width=500}
 -------------------------------------
@@ -319,7 +278,48 @@ borderline_cyclic |>
 
 ```
 
-Chordograms
+
+Dendrogram
+=====================================
+
+Column {data-width=350}
+-------------------------------------
+
+in the dendrogram on the right you see a clustering analysis, in which I have divided my corpus into the two groups to be compared; songs from before currents and these from currents and after. The idea was to see to what extent in this analysis a separation could be seen between these two groups. Here and there we see some "correctly" clustered numbers; these are from the same corpus group (and often album, as in the middle blue chunk of numbers). Yet they are also occasionally mixed together. Nangs is a definite outlier, but this was to be expected. This song is the only one that is completely instrumental and can be classified more under "ambient" music rather than indie rock. Still, I wouldn't know exactly why, for example, "sundown syndrome" and "eventually" are clustered so closely together. I might change my clustering method to see if this has any influence. 
+
+Column {data-width=650}
+-------------------------------------
+
+### Dendrogram
+```{r}
+data_for_tame_impala_clustering <- readRDS(file = "data/tame_impala_dendrogram (Dendrogram).RDS")
+
+
+data_for_tame_impala_clustering |>
+  ggdendrogram() +
+  geom_text(data = label(data_for_tame_impala_clustering),aes(x, y,
+                                                         label=label,
+                                                         hjust=0,
+                                                         colour=playlist_name), size=3) +
+  coord_flip() +
+  scale_y_reverse(expand=c(0.2, 0)) +
+  theme(axis.line.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.title.y=element_blank(),
+        panel.background=element_rect(fill="white"),
+        panel.grid=element_blank()) +
+  labs(title = "Playlist Clustering") +
+  guides(
+    colour = guide_legend(
+      title = "Playlist"
+    )
+  )
+```
+
+
+
+An interesting outlier
 =====================================
 
 Column {data-width=500}
@@ -327,7 +327,7 @@ Column {data-width=500}
 
 ### Text
 
-hshhss
+As 
 
 Column {data-width=500}
 -------------------------------------
@@ -420,8 +420,8 @@ key_templates <-
     "D#:min", circshift(minor_key, 3)
   )
 
-phf <-
-  get_tidy_audio_analysis("1KcOU0q9AMXV9xi4tSzzCc") |>
+gossip <-
+  get_tidy_audio_analysis("79chzfFIIq7cHkqcYYORk0") |>
   compmus_align(sections, segments) |>
   select(sections) |>
   unnest(sections) |>
@@ -433,7 +433,7 @@ phf <-
       )
   )
 
-phf |> 
+gossip |> 
   compmus_match_pitch_template(
     chord_templates,         # Change to chord_templates if desired
     method = "manhattan",  # Try different distance metrics
