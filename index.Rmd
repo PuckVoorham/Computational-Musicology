@@ -57,21 +57,61 @@ Column {data-width=200}
 
 ### Corpus group 1: Songs before "Currents" 
 
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0zj7vBkFkrtkIy7bbiIDHT?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
+```{r}
+#<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0zj7vBkFkrtkIy7bbiIDHT?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+```
 
 
 Column {data-width=200}
 -------------------------------------
 
 ### Corpus group 2: Songs from "Currents" and later
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2iF5St3YBr1AalBJFZK8uD?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+```{r}
+#<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2iF5St3YBr1AalBJFZK8uD?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+```
 
-
-Visualisations {.storyboard}
+A first impression {.storyboard}
 =====================================
 
-### A first visualisation
+
+### The role of Danceability, Loudness and Energy in this corpus
+
+```{r}
+
+Before_Currents <- get_playlist_audio_features("", "0zj7vBkFkrtkIy7bbiIDHT")
+Currents_and_later <- get_playlist_audio_features("", "2iF5St3YBr1AalBJFZK8uD")
+
+Categorical <- rbind(Before_Currents, Currents_and_later)
+
+ggplot(Categorical, aes(x = danceability, y = energy, size = loudness, color = playlist_name)) +
+geom_point(alpha = 0.5) +
+scale_x_continuous(limits = c(0, 1), breaks = c(0, 0.50, 1), minor_breaks = NULL) +
+scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.50, 1), minor_breaks = NULL) +
+scale_color_manual(values = c("#009966", "#009999")) +
+scale_size_continuous(trans = "exp", range = c(1, 10), guide = guide_legend(override.aes = list(size = c(1, 3, 5)))) +
+theme_light() +
+labs(x = "Danceability", y = "Energy", color = "corpus group",
+     title = "Visualisation of danceability and energy by corpus group ")
+
+
+# scatter_plot <- ggplot(Categorical, aes(x = valence, y = energy, size = tempo, color = playlist_name)) +
+#   geom_point() +
+#   labs(
+#     x = "Valence",
+#     y = "Energy"
+#   ) + theme_minimal() +
+#   theme(
+#     text = element_text( color = "black"),
+#     plot.subtitle = element_text(size = 12, color = "black"),
+#     #plot.background = element_rect(fill = "lightblue"),
+#     plot.margin = unit(c(5, 10, 5, 10), units = "mm")
+#   ) 
+# 
+# scatter_plot
+
+```
+
+### Danceability as a first key factor
 
 ```{r}
 Before_Currents <- get_playlist_audio_features("", "0zj7vBkFkrtkIy7bbiIDHT")
@@ -91,10 +131,10 @@ Categorical |>
 
 ---
 
-In this first, relatively simple plot, the music used in this corpus is divided into two categories. The left form includes all songs by Tame Impala up to the Currents album in 2015. The right concerns all songs from 2015 (including Currents) to the present. In this plot, these categories are set out on the y-axis in "danceability". The expectation here was that earlier songs, before the popular album currents, were less danceable. This was the expectation because these songs could be considered more like Tame-Impala's somewhat inaccessible, rougher psychedelic rock. In short; music that could be perceived as less danceable than the smooth, disco- and synthpop-influenced songs from currents and other later tracks. The plot does somewhat support this expectation. It can be seen that at least the "peak" in danceability of the songs before currents is lower than the peak of the songs after currents. There is also less variation seen in the second group. First, the songs barely seem to score below a score of 0.4 in danceability, confirming the hypothesis. On the other hand, a single/some songs do seem to score higher in danceability than the songs after currents. To find out what this is due to requires further analysis. It could be that the whole variation in the first category is significantly higher because this category contains more songs.  
+In this plot, the music used in this corpus is divided into two categories. The left form includes all songs by Tame Impala up to the Currents album in 2015. The right concerns all songs from 2015 (including Currents) to the present. In this plot, these categories are set out on the y-axis in "danceability". The expectation here was that earlier songs, before the popular album currents, were less danceable. This was the expectation because these songs could be considered more like Tame-Impala's somewhat inaccessible, rougher psychedelic rock. In short; music that could be perceived as less danceable than the smooth, disco- and synthpop-influenced songs from currents and other later tracks. The plot does somewhat support this expectation. It can be seen that at least the "peak" in danceability of the songs before currents is lower than the peak of the songs after currents. There is also less variation seen in the second group. First, the songs barely seem to score below a score of 0.4 in danceability, confirming the hypothesis. On the other hand, a single/some songs do seem to score higher in danceability than the songs after currents. To find out what this is due to requires further analysis. It could be that the whole variation in the first category is significantly higher because this category contains more songs.  
 
 
-### A second visualisation
+### Loudness as a second important characteristic
 
 ```{r}
 scatter_plot <- ggplot(Categorical, aes(x = valence, y = energy, size = tempo, color = playlist_name)) +
@@ -114,9 +154,21 @@ scatter_plot
 
 ```
 
+
+
 ---
 
 hfkhkanjbgkbnsjkBajkjv
+
+
+### Energy as a third major indicator
+
+```{r}
+
+```
+
+---
+
 
 Chromagram
 =====================================
