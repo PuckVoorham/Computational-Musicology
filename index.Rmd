@@ -87,7 +87,7 @@ ggplot(Categorical, aes(x = danceability, y = energy, size = loudness, color = p
 geom_point(alpha = 0.5) +
 scale_x_continuous(limits = c(0, 1), breaks = c(0, 0.50, 1), minor_breaks = NULL) +
 scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.50, 1), minor_breaks = NULL) +
-scale_color_manual(values = c("#009966", "#009999")) +
+scale_color_manual(values = c("#9900cc", "#009999")) +
 scale_size_continuous(trans = "exp", range = c(1, 10), guide = guide_legend(override.aes = list(size = c(1, 3, 5)))) +
 theme_light() +
 labs(x = "Danceability", y = "Energy", size = "Loudness", color = "Corpus Group",
@@ -105,13 +105,19 @@ Currents_and_later <- get_playlist_audio_features("", "2iF5St3YBr1AalBJFZK8uD")
 Categorical <- rbind(Before_Currents, Currents_and_later)
 
 Categorical |>
+  
   ggplot(aes(x = playlist_name, y = danceability, box = FALSE )) +
-  geom_violin() + theme_minimal() +
+  geom_violin(fill = "lightblue", color = "lightblue") + 
+  scale_fill_gradient(low = "lightblue", high = "darkblue") +
+  theme_minimal() +
+  labs(x = "Corpus Group", y = "Danceability",
+  title = "Visualisation of danceability by corpus group") +
   theme(
     plot.subtitle = element_text(size = 12, color = "black"),
-    #plot.background = element_rect(fill = "lightblue"),
+    panel.background = element_rect(fill = "white"),
     plot.margin = unit(c(5, 10, 5, 10), units = "mm")
-  ) 
+  )
+
 ```
 
 ---
@@ -198,17 +204,6 @@ chromagram_1 <- lost_in_yesterday |>
   scale_color_gradientn(colors = my_palette)
   ggplotly(chromagram_1, tooltip = "none", source = "none")
   
-  # geom_tile() +
-  # ggtitle("Chromagram: Lost In Yesterday'") +
-  # labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  # theme_minimal() +
-  #   theme(
-  #   text = element_text( color = "black"),
-  #   plot.subtitle = element_text(size = 12, color = "black"),
-  #   #plot.background = element_rect(fill = "white"),
-  #   plot.margin = unit(c(5, 10, 5, 10), units = "mm")
-  # ) +
-  # scale_fill_viridis_c()
 ```
 
 ### Chromagram 2 
@@ -243,36 +238,19 @@ chromagram_2 <- the_bold_arrow_of_time |>
   scale_color_gradientn(colors = my_palette)
   ggplotly(chromagram_2, tooltip = "none", source = "none")
   
-  # geom_tile() +
-  # labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  # theme_minimal() +
-  # theme(
-  #   text = element_text( color = "black"),
-  #   plot.subtitle = element_text(size = 12, color = "black"),
-  #   #plot.background = element_rect(fill = "lightblue"),
-  #   plot.margin = unit(c(5, 10, 5, 10), units = "mm")
-  # ) +
-  # scale_fill_viridis_c()
 ```
 
-Ceptrogram
+Ceptrograms
 =====================================
 
-Column {data-width=500}
+Column {.tabset}
 -------------------------------------
 
-### text 
-
-hfsghKZg
-
-Column {data-width=500}
--------------------------------------
-
-### Ceptrogram
+### Ceptrogram 1
 ```{r}
-elephant_ceptrogram <- readRDS(file = "data/elephant_ceptrogram (Ceptrogram).RDS")
+the_sun_ceptrogram <- readRDS(file = "data/the_sun_ceptrogram (Ceptrogram).RDS")
 
-elephant_ceptrogram |>
+the_sun_ceptrogram |>
   ggplot(
     aes(
       x = start + duration / 2,
@@ -286,6 +264,36 @@ elephant_ceptrogram |>
   scale_fill_viridis_c() +
   theme_classic()
 ```
+
+### Ceptrogram 2
+
+```{r}
+disciples_ceptrogram <- readRDS(file = "data/disciples_ceptrogram (Ceptrogram).RDS")
+
+disciples_ceptrogram |>
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = basis,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  scale_fill_viridis_c() +
+  theme_classic()
+
+```
+
+Column {data-width=500}
+-------------------------------------
+
+### text 
+
+On the left we see two ceptrograms
+
+
 
 Self similarity matrices
 =====================================
@@ -392,6 +400,7 @@ data_for_tame_impala_clustering |>
         panel.background=element_rect(fill="white"),
         panel.grid=element_blank()) +
   labs(title = "Playlist Clustering") +
+  scale_color_manual(values = c("#9900cc", "#009999")) +
   guides(
     colour = guide_legend(
       title = "Playlist"

@@ -65,7 +65,7 @@ tame_impala_juice <-
       instrumentalness +
       liveness +
       valence +
-      tempo +
+      tempo,
       #duration +
       # + `C#|Db` + D + `D#|Eb` +
       #E + `F` + `F#|Gb` + G +
@@ -102,6 +102,8 @@ data_for_tame_impala_clustering$labels <- data_for_tame_impala_clustering$labels
 # Add factor so can use colouring!
 data_for_tame_impala_clustering$labels$label <- factor(data_for_tame_impala_clustering$labels$label)
 
+saveRDS(object = data_for_tame_impala_clustering, file = "data/tame_impala_dendrogram (Dendrogram).RDS")
+
 data_for_tame_impala_clustering |>
   ggdendrogram() +
   geom_text(data = label(data_for_tame_impala_clustering),aes(x, y,
@@ -117,6 +119,7 @@ data_for_tame_impala_clustering |>
         panel.background=element_rect(fill="white"),
         panel.grid=element_blank()) +
   labs(title = "Playlist Clustering") +
+  scale_color_manual(values = c("#9900cc", "#009999")) +
   guides(
     colour = guide_legend(
       title = "Playlist"
@@ -124,3 +127,4 @@ data_for_tame_impala_clustering |>
   )
 
 # package protoclust
+
