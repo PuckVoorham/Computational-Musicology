@@ -70,8 +70,8 @@ tame_impala_juice <-
       # + `C#|Db` + D + `D#|Eb` +
       #E + `F` + `F#|Gb` + G +
       #G#|Ab` + A + `A#|Bb` + B +
-      #c01 + c02 + c03 + c04 + c05 + c06 +
-      #c07 + c08 + c09 + c10 + c11 + c12,
+      c01 + c02 + c03 + c04 + c05 + c06 +
+      c07 + c08 + c09 + c10 + c11 + c12,
     data = tame_impala_complete
   ) |>
   step_center(all_predictors()) |>
@@ -126,3 +126,4 @@ data_for_tame_impala_clustering |>
   )
 
 # package protoclust
+

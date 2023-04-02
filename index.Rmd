@@ -27,12 +27,12 @@ library(compmus)
 Dendrogram
 =====================================
 
-Column {data-width=500}
+Column {data-width=350}
 -------------------------------------
 
-The dendrogram on the right you see a clustering analysis, in which I have divided my corpus into the two groups to be compared; songs from before currents and these from currents and after. The idea was to see to what extent in this analysis a separation could be seen between these two groups. Here and there we see some "correctly" clustered numbers; these are from the same corpus group (and often album, as in the middle blue chunk of numbers). Yet they are also occasionally mixed together. Nangs is a definite outlier, but this was to be expected. This song is the only one that is completely instrumental and can be classified more under "ambient" music rather than indie rock. Still, I wouldn't know exactly why, for example, "sundown syndrome" and "eventually" are clustered so closely together. I might change my clustering method to see if this has any influence. 
+in the dendrogram on the right you see a clustering analysis, in which I have divided my corpus into the two groups to be compared; songs from before currents and these from currents and after. The idea was to see to what extent in this analysis a separation could be seen between these two groups. Here and there we see some "correctly" clustered numbers; these are from the same corpus group (and often album, as in the middle blue chunk of numbers). Yet they are also occasionally mixed together. Nangs is a definite outlier, but this was to be expected. This song is the only one that is completely instrumental and can be classified more under "ambient" music rather than indie rock. Still, I wouldn't know exactly why, for example, "sundown syndrome" and "eventually" are clustered so closely together. I might change my clustering method to see if this has any influence. 
 
-Column {data-width=500}
+Column {data-width=650}
 -------------------------------------
 
 ### Dendrogram
@@ -260,27 +260,9 @@ Column {data-width=500}
 ### Self similarity matrix: ceptogram
 
 ```{r self similarity matrix}
-phf <-
-  get_tidy_audio_analysis("1KcOU0q9AMXV9xi4tSzzCc") |> # Change URI.
-  compmus_align(bars, segments) |>                     # Change `bars`
-  select(bars) |>                                      #   in all three
-  unnest(bars) |>                                      #   of these lines.
-  mutate(
-    pitches =
-      map(segments,
-          compmus_summarise, pitches,
-          method = "rms", norm = "euclidean"              # Change summary & norm.
-      )
-  ) |>
-  mutate(
-    timbre =
-      map(segments,
-          compmus_summarise, timbre,
-          method = "rms", norm = "euclidean"              # Change summary & norm.
-      )
-  )
+SSM <- readRDS(file = "data/SSM (SSM).RDS")
 
-phf |>
+SSM |>
   compmus_self_similarity(timbre, "cosine") |> 
   ggplot(
     aes(
@@ -480,26 +462,11 @@ Column {data-width=500}
 
 ### Track level summary
 
-Before_Currents <-
-  get_playlist_audio_features(
-  "", "0zj7vBkFkrtkIy7bbiIDHT"
-  ) |>
-  slice(1:30) |>
-  add_audio_analysis()
+```{r}
 
-After_Currents <-
-  get_playlist_audio_features(
-  "", "2iF5St3YBr1AalBJFZK8uD"
-  ) |>
-  slice(1:30) |>
-  add_audio_analysis()
+track_level_summary <- readRDS(file = "data/track_level_summary (track_level_summary).RDS")
 
-Tame_Impala <-
-  Before_Currents |>
-  mutate(genre = "Before currents") |>
-  bind_rows(After_Currents |> mutate(genre = "After currents"))
-
-Tame_Impala |>
+track_level_summary |>
   mutate(
     timbre =
       map(
@@ -516,6 +483,8 @@ Tame_Impala |>
   scale_fill_viridis_d() +
   labs(x = "Spotify Timbre Coefficients", y = "", fill = "Genre")
 
+```
+
 
 Conclusion
 =====================================
@@ -523,9 +492,33 @@ Conclusion
 Column {data-width=1000}
 -------------------------------------
 
+
 ### Conclusion
 
 Here I would write my overall conclusions so far
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

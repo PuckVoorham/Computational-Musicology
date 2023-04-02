@@ -181,6 +181,7 @@ html, body {
 <img class="mobile-figure" data-mobile-figure-id=fig8 src="index_files/figure-html/unnamed-chunk-8-1.mb.png" />
 <img class="mobile-figure" data-mobile-figure-id=fig9 src="index_files/figure-html/unnamed-chunk-9-1.mb.png" />
 <img class="mobile-figure" data-mobile-figure-id=fig10 src="index_files/figure-html/unnamed-chunk-10-1.mb.png" />
+<img class="mobile-figure" data-mobile-figure-id=fig11 src="index_files/figure-html/unnamed-chunk-11-1.mb.png" />
 <script type="text/javascript">
 
 
@@ -1874,23 +1875,23 @@ window.FlexDashboardComponents.push({
 </div>
 <div id="dendrogram" class="section level1">
 <h1>Dendrogram</h1>
-<div id="column" class="section level2" data-width="500">
+<div id="column" class="section level2" data-width="350">
 <h2>Column</h2>
-<p>The dendrogram on the right you see a clustering analysis, in which I
-have divided my corpus into the two groups to be compared; songs from
-before currents and these from currents and after. The idea was to see
-to what extent in this analysis a separation could be seen between these
-two groups. Here and there we see some “correctly” clustered numbers;
-these are from the same corpus group (and often album, as in the middle
-blue chunk of numbers). Yet they are also occasionally mixed together.
-Nangs is a definite outlier, but this was to be expected. This song is
-the only one that is completely instrumental and can be classified more
-under “ambient” music rather than indie rock. Still, I wouldn’t know
-exactly why, for example, “sundown syndrome” and “eventually” are
-clustered so closely together. I might change my clustering method to
-see if this has any influence.</p>
+<p>in the dendrogram on the right you see a clustering analysis, in
+which I have divided my corpus into the two groups to be compared; songs
+from before currents and these from currents and after. The idea was to
+see to what extent in this analysis a separation could be seen between
+these two groups. Here and there we see some “correctly” clustered
+numbers; these are from the same corpus group (and often album, as in
+the middle blue chunk of numbers). Yet they are also occasionally mixed
+together. Nangs is a definite outlier, but this was to be expected. This
+song is the only one that is completely instrumental and can be
+classified more under “ambient” music rather than indie rock. Still, I
+wouldn’t know exactly why, for example, “sundown syndrome” and
+“eventually” are clustered so closely together. I might change my
+clustering method to see if this has any influence.</p>
 </div>
-<div id="column-1" class="section level2" data-width="500">
+<div id="column-1" class="section level2" data-width="650">
 <h2>Column</h2>
 <div id="dendrogram-1" class="section level3">
 <h3>Dendrogram</h3>
@@ -2115,20 +2116,10 @@ this difference means and whether I can recognize it myself.</p>
 <h2>Column</h2>
 <div id="track-level-summary" class="section level3">
 <h3>Track level summary</h3>
-<p>Before_Currents &lt;- get_playlist_audio_features(
-““,”0zj7vBkFkrtkIy7bbiIDHT” ) |&gt; slice(1:30) |&gt;
-add_audio_analysis()</p>
-<p>After_Currents &lt;- get_playlist_audio_features(
-““,”2iF5St3YBr1AalBJFZK8uD” ) |&gt; slice(1:30) |&gt;
-add_audio_analysis()</p>
-<p>Tame_Impala &lt;- Before_Currents |&gt; mutate(genre = “Before
-currents”) |&gt; bind_rows(After_Currents |&gt; mutate(genre = “After
-currents”))</p>
-<p>Tame_Impala |&gt; mutate( timbre = map( segments, compmus_summarise,
-timbre, method = “mean” ) ) |&gt; select(genre, timbre) |&gt;
-compmus_gather_timbre() |&gt; ggplot(aes(x = basis, y = value, fill =
-genre)) + geom_violin() + scale_fill_viridis_d() + labs(x = “Spotify
-Timbre Coefficients”, y = ““, fill =”Genre”)</p>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" width="576" data-figure-id=fig11 /></p>
 </div>
 </div>
 </div>
