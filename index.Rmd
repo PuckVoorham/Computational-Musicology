@@ -21,7 +21,12 @@ library(ggdendro)
 library(heatmaply)
 library(compmus)
 
+
+soft_blue <- colorRampPalette(c("#00FF33", "#00FF66" , "#00FF99", "#00FFCC", "#00CC99"))(100)
+
+
 ```
+
 
 Introduction
 =====================================
@@ -61,8 +66,8 @@ Categorical |>
   ggplot(aes(x = playlist_name, y = danceability, box = FALSE )) +
   geom_violin() + theme_minimal() +
   theme(
-    plot.subtitle = element_text(size = 12, color = "white"),
-    plot.background = element_rect(fill = "lightblue"),
+    plot.subtitle = element_text(size = 12, color = "black"),
+    #plot.background = element_rect(fill = "lightblue"),
     plot.margin = unit(c(5, 10, 5, 10), units = "mm")
   ) 
 ```
@@ -96,7 +101,7 @@ scatter_plot
 
 hfkhkanjbgkbnsjkBajkjv
 
-Chromagrammmmmmm
+Chromagram
 =====================================
 
 Column {data-width=500}
@@ -130,12 +135,13 @@ Categorical |>
     )
   ) +
   geom_tile() +
+  ggtitle("Chromagram: Lost In Yesterday'") +
   labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
-  theme(
-    text = element_text( color = "white"),
-    plot.subtitle = element_text(size = 12, color = "white"),
-    plot.background = element_rect(fill = "lightblue"),
+    theme(
+    text = element_text( color = "black"),
+    plot.subtitle = element_text(size = 12, color = "black"),
+    #plot.background = element_rect(fill = "white"),
     plot.margin = unit(c(5, 10, 5, 10), units = "mm")
   ) +
   scale_fill_viridis_c()
@@ -167,9 +173,9 @@ Categorical |>
   labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
   theme(
-    text = element_text( color = "white"),
-    plot.subtitle = element_text(size = 12, color = "white"),
-    plot.background = element_rect(fill = "lightblue"),
+    text = element_text( color = "black"),
+    plot.subtitle = element_text(size = 12, color = "black"),
+    #plot.background = element_rect(fill = "lightblue"),
     plot.margin = unit(c(5, 10, 5, 10), units = "mm")
   ) +
   scale_fill_viridis_c()
@@ -180,6 +186,8 @@ Ceptrogram
 
 Column {data-width=500}
 -------------------------------------
+
+### text 
 
 hfsghKZg
 
@@ -205,7 +213,7 @@ elephant_ceptrogram |>
   theme_classic()
 ```
 
-SSM
+Self similarity matrices
 =====================================
 
 Column {data-width=500}
@@ -449,7 +457,7 @@ gossip |>
 ```
 
 
-SUM
+Track level summary
 =====================================
 
 Column {data-width=500}
