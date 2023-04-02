@@ -90,24 +90,9 @@ scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.50, 1), minor_breaks = NULL
 scale_color_manual(values = c("#009966", "#009999")) +
 scale_size_continuous(trans = "exp", range = c(1, 10), guide = guide_legend(override.aes = list(size = c(1, 3, 5)))) +
 theme_light() +
-labs(x = "Danceability", y = "Energy", color = "corpus group",
+labs(x = "Danceability", y = "Energy", size = "Loudness", color = "Corpus Group",
      title = "Visualisation of danceability and energy by corpus group ")
 
-
-# scatter_plot <- ggplot(Categorical, aes(x = valence, y = energy, size = tempo, color = playlist_name)) +
-#   geom_point() +
-#   labs(
-#     x = "Valence",
-#     y = "Energy"
-#   ) + theme_minimal() +
-#   theme(
-#     text = element_text( color = "black"),
-#     plot.subtitle = element_text(size = 12, color = "black"),
-#     #plot.background = element_rect(fill = "lightblue"),
-#     plot.margin = unit(c(5, 10, 5, 10), units = "mm")
-#   ) 
-# 
-# scatter_plot
 
 ```
 
