@@ -257,9 +257,6 @@ Column {.tabset}
 -------------------------------------
 
 ### Ceptrogram 1
-```{=html}
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6wcBZjhU4dk813FYE1hybg?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-```
 
 ```{r}
 the_sun_ceptrogram <- readRDS(file = "data/the_sun_ceptrogram (Ceptrogram).RDS")
@@ -280,11 +277,6 @@ the_sun_ceptrogram |>
 ```
 
 ### Ceptrogram 2
-
-```{=html}
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2gNfxysfBRfl9Lvi9T3v6R?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-```
-
 
 ```{r}
 disciples_ceptrogram <- readRDS(file = "data/disciples_ceptrogram (Ceptrogram).RDS")
@@ -309,6 +301,12 @@ Column {data-width=500}
 -------------------------------------
 
 ### text 
+```{=html}
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6wcBZjhU4dk813FYE1hybg?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+```
+```{=html}
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2gNfxysfBRfl9Lvi9T3v6R?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+```
 
 On the left we see two ceptrograms. Again, the first represents a number of for currents. The second number is one from currents themselves. Looking at the first one, the first thing that stands out is the yellow piece at the start of the number at timbre feature 2. This represents "brightness"; the high frequencies. This is logically explained by the high, squeaky sounds at the beginning of the song. At the same time, we see that timbre feature 1, which represents volume, is low and builds up slowly. This is also evident in the song. The high sudden tones reappear later and at the very end we see timbre feature 3 suddenly present. These indicate the "flatness." This can also be heard, the song ends in a kind of monotonous noise. 
 
