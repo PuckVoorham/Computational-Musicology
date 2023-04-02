@@ -39,7 +39,7 @@ my_palette <- viridis_pal(option = "viridis")(10)
 Introduction
 =====================================
 
-Column {data-width=500}
+Column {data-width=700}
 -------------------------------------
 
 ### Does the genre of a major music phenomenon like Tame Impala change due to popularity?
@@ -52,12 +52,21 @@ The expectations I have at this moment are therefore that their earlier songs ca
 
 Songs that, in my opinion, typify both extremes in this are The Bold Arrow of Time from the album Innerspeaker (2010) as typical hard psychedelic rock versus The less I know the better from Currents (2015). Songs like Nangs and Gossip from that same album might be a bit off, as they could be better considered as ambient music and are hard to categorize in any of the aforementioned genres.
 
-Column {data-width=500}
+Column {data-width=200}
 -------------------------------------
 
-### TATATATAT
+### Corpus group 1: Songs before "Currents" 
 
-tetetetetete
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0zj7vBkFkrtkIy7bbiIDHT?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+
+
+Column {data-width=200}
+-------------------------------------
+
+### Corpus group 2: Songs from "Currents" and later
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2iF5St3YBr1AalBJFZK8uD?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
 
 Visualisations {.storyboard}
 =====================================
@@ -115,6 +124,7 @@ Chromagram
 Column {data-width=500}
 -------------------------------------
 
+### text 
 Here is a chromagram of the song Lost in Yesterday. In this song from Tame Impala's latest album, there are clear characteristics of disco, synth-pop and funk in addition to psychedelic influences. 
 
 Column {data-width=500}
