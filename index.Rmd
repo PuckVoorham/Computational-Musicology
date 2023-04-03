@@ -178,8 +178,11 @@ Chromagrams
 Column {data-width=500}
 -------------------------------------
 
-### text 
-Here is a chromagram of the song Lost in Yesterday. In this song from Tame Impala's latest album, there are clear characteristics of disco, synth-pop and funk in addition to psychedelic influences. 
+### patterns
+
+In the first chromagram, visualising the song "The Bold Arrow Of Time" shows a differentiating pattern, indicating that the distribution of musical notes and frequencies is often changing over time. As the song progresses, we see a gradual shift in the distribution, reflecting the changing melody, harmony, or rhythm of the song. 
+
+The chromogram of the second song "Borderline" shows a more constant and predictable pattern. Such a chromagram is more likely to represent the distribution of musical notes and frequencies in a song that has a repetitive and predictable melody, harmony, or rhythm. For example, a simple pop song with a four-chord progression and a steady rhythm would show a constant and predictable pattern in its chromagram. The changes we see in "Borderline" are minimal and represent a section shift e.g. to the bridge near the end of the song), where the musical elements are usually more complex and dynamic. 
 
 Column {data-width=500}
 -------------------------------------
@@ -299,10 +302,8 @@ disciples_ceptrogram |>
 
 ```
 
-Column {data-width=500}
+Column {data-width=350}
 -------------------------------------
-
-### text 
 
 ```{=html}
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6wcBZjhU4dk813FYE1hybg?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
@@ -321,10 +322,18 @@ The interesting thing about these visualizations is that, although timbre featur
 Self similarity matrices - ceptrogram
 =====================================
 
-Column {data-width=500}
+Column {data-width=350}
 -------------------------------------
+```{=html}
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2wxeIcUPu0hdlB8pFsxSAi?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
-posthumous forgiveness 
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6K4t31amVTZDgR3sKmwUJJ?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1KcOU0q9AMXV9xi4tSzzCc?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+```
+
+Next, we can discuss self similarity. For these matrices, I analysed the songs based on timbre. In this way we can interpret variations in the repetition of for example motifs. These motifs could be aspects of the song like rhythm, harmonies, or repeating melodies. With a self-similarity matrix, you can get a feeling of the continuity and coherence of a song. The songs I chose show very well three completely different structures. The first one is an old one, in which it is difficult to recognize a pattern; this makes the song unpredictable. The second one, on the other hand, is very self-similar; something you often see in popular music. The third one I added because, even though the first two seem opposites, there are also newer songs (from after Currents) that show these timbral shifts as is remarkable (visually and through audio) in the song "Posthumous Forgiveness". This song completely takes a turn in tempo and instrumentality to a slow, ambient, song, representing the "posthumous forgiveness" he is singing about. The use of timbral shifts in this song can be seen as a deliberate creative choice, designed to underscore the emotional themes of the lyrics.
 
 Column {.tabset}
 -------------------------------------
@@ -446,14 +455,16 @@ Column {data-width=350}
 ### Tempo shifts as an indication of accessibility of music 
 
 ```{=html}
-<!-- <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6qZjm61s6u8Ead9sWxCDro?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> -->
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6qZjm61s6u8Ead9sWxCDro?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
 
-<!-- <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5hM5arv9KDbCHS0k9uqwjr?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> -->
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5hM5arv9KDbCHS0k9uqwjr?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 ```
 
     
-To analyze tempo, I used two typical songs from the different groups in my corpus. The first tempogram shows a song from before currents and the second shows one from after currents. It is interesting to note that the songs from before currents show more tempo changes than the songs after. Tempo changes could affect the extent to which a song can be considered accessible and danceable. The decrease in tempo changes in songs after currents could support the hypothesis. 
+The tempograms give a very clear and beautiful pattern in which the development of the tempo of two songs can be seen. I compared both normal and cyclic tempograms, but eventually went with the cyclic one. Even though this method only shows the tempo it's most sure about, the temporgram of the song "elephant", shows tempo shifts at various points in the song. Psychedelic rock often features non-linear structures and unpredictable tempo changes, which can create a sense of disorientation and otherworldliness in the music. The presence of tempo shifts in "Elephant" tempogram is likely an indication of the psychedelic rock influence on the song's structure and composition.
+
+The second tempogram, on the other hand, shows a very tight, constant line.This is consistent with the structure of pop music, which typically follows a more predictable and formulaic structure. Pop music often relies on a consistent and steady tempo to create a sense of momentum and energy, and as a result, tempo changes are less common in this genre.
 
 
 Track level summary
@@ -462,7 +473,7 @@ Track level summary
 Column {data-width=350}
 -------------------------------------
 
-In this visualization, you can see a comparison between the two groups within my chosen corpus: However, there is less variation than I expected beforehand in terms of timbre values. However, the second value (which says something about the "strength" of the high frequencies is significantly different. I am going to delve further into what exactly this difference means and whether I can recognize it myself. 
+In this visualization, you can see a comparison between the two groups within my chosen corpus: However, there is less variation than I expected beforehand in terms of timbre values. However, the second value (which, says something about the "brightness"  is significantly different. The first group has a much broader range in this timbre value than the second group. This could suggest that the first group's music (songs from before currents) has a greater emphasis on bright or high-pitched sounds, while the second group's music may have a more consistent or uniform timbral quality.
 
 Column {data-width=650}
 -------------------------------------
@@ -676,9 +687,11 @@ Column {data-width=1000}
 
 ### Conclusion
 
-Here I would write my overall conclusions so far
+Based on the analyses, we can conclude a few things. It is clear that Tame Impala indeed has undergone a few changes. 
 
+In terms of the first group of songs, which includes all songs before the release of their album "Currents," Tame Impala's music was more guitar-based and rooted in traditional psychedelic rock. These songs often featured distorted guitar riffs and driving drum beats which we recognize in the chroma- and tempograms.In the second group of songs, which includes all songs from "Currents" until now, Tame Impala's sound has shifted towards a more pop-influenced, electronic and synth-heavy sound. The songs show more repetitiveness in them and they became more danceable overall.
 
+In conclusion, I would say that Tame Impala's music has been 'influenced' over time, incorporating elements of electronic music, funk, and R&B and pop, but it still maintained it's psychedelic and dreamy vibe.
 
 
 
