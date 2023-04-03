@@ -329,10 +329,9 @@ posthumous forgiveness
 Column {.tabset}
 -------------------------------------
 
-### SSM 1: Sollitude is Bliss
+### SSM 1: H.f.g.w (Canyons Drunken Rage)
 
 ```{r self similarity matrix}
-
 
 SSM_1 <- readRDS(file = "data/SSM_1 (SSM).RDS")
 
@@ -445,8 +444,16 @@ Column {data-width=350}
 -------------------------------------
     
 ### Tempo shifts as an indication of accessibility of music 
+
+```{=html}
+<!-- <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6qZjm61s6u8Ead9sWxCDro?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> -->
+
+
+<!-- <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5hM5arv9KDbCHS0k9uqwjr?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> -->
+```
+
     
-To analyze tempo, I used two typical songs from the different groups in my corpus. The first tempogram shows a number from before currents and the second shows one from after currents. It is interesting to note that the songs from before currents show more tempo changes than the songs after. Tempo changes could affect the extent to which a song can be considered accessible and danceable. The decrease in tempo changes in songs after currents could support the hypothesis. 
+To analyze tempo, I used two typical songs from the different groups in my corpus. The first tempogram shows a song from before currents and the second shows one from after currents. It is interesting to note that the songs from before currents show more tempo changes than the songs after. Tempo changes could affect the extent to which a song can be considered accessible and danceable. The decrease in tempo changes in songs after currents could support the hypothesis. 
 
 
 Track level summary
