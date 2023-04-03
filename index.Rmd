@@ -309,10 +309,11 @@ Column {data-width=500}
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2gNfxysfBRfl9Lvi9T3v6R?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 ```
 
-On the left we see two ceptrograms. Again, the first represents a number of for currents. The second number is one from currents themselves. Looking at the first one, the first thing that stands out is the yellow piece at the start of the number at timbre feature 2. This represents "brightness"; the high frequencies. This is logically explained by the high, squeaky sounds at the beginning of the song. At the same time, we see that timbre feature 1, which represents volume, is low and builds up slowly. This is also evident in the song. The high sudden tones reappear later and at the very end we see timbre feature 3 suddenly present. These indicate the "flatness." This can also be heard, the song ends in a kind of monotonous noise. 
+On the left we see two ceptrograms. Again, the first represents a song from before currents. The second song is one from currents itself. Looking at the first one, the first thing that stands out is the yellow piece at the start of the song at timbre feature 2. This represents "brightness"; the high frequencies. This is logically explained by the high, squeaky sounds at the beginning of the song. At the same time, we see that timbre feature 1, which represents volume, is low and builds up slowly. This is also evident in the song. The high sudden tones reappear later and at the very end we see timbre feature 3 suddenly present. These indicate the "flatness." This can also be heard, the song ends in a kind of monotonous noise. 
 
 The second ceptrogram shows that the song starts almost right away at a high volume and then stays like that for the whole song, which is also true with when you listen to the song. Somewhere in the middle, timbre feature 4 suddenly lights up, indicating the difference from the beginning and end. after several listens, I heard what was meant by this: It's a very brief moment where all the instrumentation falls away and only a tick can be heard, after which an additional "layer" of instrumentation is added and the song continues; it's a bit of a tipping point in the song. 
 
+The interesting thing about these visualizations is that, although timbre features 1 and 2 are clearly visible in both, in the first ceptrogram you can see how the contrast gradually alternates between the first and the second, while in the second visualization it seems to be quite constant, with a single moment that pops out. This could be an example of how a pop-influenced song compares to somewhat more surprising, unexpected, and contrasting psychedelic rock characteristics.
 
 
 Self similarity matrices
@@ -352,14 +353,14 @@ SSM |>
 Tempograms
 =====================================
 
-Column {data-width=500}
+Column {data-width=400}
 -------------------------------------
     
 ### Tempo shifts as an indication of accessibility of music 
     
 To analyze tempo, I used two typical songs from the different groups in my corpus. The first tempogram shows a number from before currents and the second shows one from after currents. It is interesting to note that the songs from before currents show more tempo changes than the songs after. Tempo changes could affect the extent to which a song can be considered accessible and danceable. The decrease in tempo changes in songs after currents could support the hypothesis. 
    
-Column {data-width=500}
+Column {data-width=600}
 -------------------------------------
 
 ### Tempogram 1: elephant
@@ -389,13 +390,52 @@ borderline_cyclic |>
 ```
 
 
+
+Track level summary
+=====================================
+
+Column {data-width=350}
+-------------------------------------
+
+In this visualization, you can see a comparison between the two groups within my chosen corpus: However, there is less variation than I expected beforehand in terms of timbre values. However, the second value (which says something about the "strength" of the high frequencies is significantly different. I am going to delve further into what exactly this difference means and whether I can recognize it myself. 
+
+Column {data-width=650}
+-------------------------------------
+
+### Track level summary
+
+```{r}
+
+track_level_summary <- readRDS(file = "data/track_level_summary (track_level_summary).RDS")
+
+track_level_summary |>
+  mutate(
+    timbre =
+      map(
+        segments,
+        compmus_summarise,
+        timbre,
+        method = "mean"
+      )
+  ) |>
+  select(genre, timbre) |>
+  compmus_gather_timbre() |>
+  ggplot(aes(x = basis, y = value, fill = genre)) +
+  geom_violin() +
+  scale_fill_viridis_d() +
+  labs(x = "Spotify Timbre Coefficients", y = "", fill = "Genre")
+
+```
+
+
+
 Dendrogram
 =====================================
 
 Column {data-width=350}
 -------------------------------------
 
-in the dendrogram on the right you see a clustering analysis, in which I have divided my corpus into the two groups to be compared; songs from before currents and these from currents and after. The idea was to see to what extent in this analysis a separation could be seen between these two groups. Here and there we see some "correctly" clustered numbers; these are from the same corpus group (and often album, as in the middle blue chunk of numbers). Yet they are also occasionally mixed together. Nangs is a definite outlier, but this was to be expected. This song is the only one that is completely instrumental and can be classified more under "ambient" music rather than indie rock. Still, I wouldn't know exactly why, for example, "sundown syndrome" and "eventually" are clustered so closely together. I might change my clustering method to see if this has any influence. 
+in the dendrogram on the right you see a clustering analysis using the 'average' method for a balanced tree, in which I have divided my corpus into the two groups to be compared; songs from before currents and these from currents and after. The idea was to see to what extent in this analysis a separation could be seen between these two groups. Here and there we see some "correctly" clustered numbers; these are from the same corpus group (and often album, as in the middle blue chunk of numbers). Yet they are also occasionally mixed together. Nangs is a definite outlier, but this was to be expected. This song is the only one that is completely instrumental and can be classified more under "ambient" music rather than indie rock. Still, I wouldn't know exactly why, for example, "sundown syndrome" and "eventually" are clustered so closely together. 
 
 Column {data-width=650}
 -------------------------------------
@@ -430,17 +470,18 @@ data_for_tame_impala_clustering |>
 
 
 
-An interesting outlier
+The odd one out: Gossip
 =====================================
 
-Column {data-width=500}
+Column {data-width=350}
 -------------------------------------
 
-### Text
+### An interesting outlier
 
-As 
+As mentioned earlier, it was expected that GOssip would not fall completely within the rest. At first I thought this would be purely due to the absence of text (which of course contributes to this), but also when we look at other features we see a striking result. Take an example of this chordogram: it actually shows a constant presence of a number of chords, which are also played simultaneously. This fits very well with the 'ambient' style I mentioned earlier, where the whole piece is actually a continuous succession of tones.
 
-Column {data-width=500}
+
+Column {data-width=650}
 -------------------------------------
 
 ### Chordogram 
@@ -557,43 +598,6 @@ gossip |>
   scale_fill_viridis_c(guide = "none") +
   theme_minimal() +
   labs(x = "Time (s)", y = "")
-```
-
-
-Track level summary
-=====================================
-
-Column {data-width=500}
--------------------------------------
-
-In this visualization, you can see a comparison between the two groups within my chosen corpus: However, there is less variation than I expected beforehand in terms of timbre values. However, the second value (which says something about the "strength" of the high frequencies is significantly different. I am going to delve further into what exactly this difference means and whether I can recognize it myself. 
-
-Column {data-width=500}
--------------------------------------
-
-### Track level summary
-
-```{r}
-
-track_level_summary <- readRDS(file = "data/track_level_summary (track_level_summary).RDS")
-
-track_level_summary |>
-  mutate(
-    timbre =
-      map(
-        segments,
-        compmus_summarise,
-        timbre,
-        method = "mean"
-      )
-  ) |>
-  select(genre, timbre) |>
-  compmus_gather_timbre() |>
-  ggplot(aes(x = basis, y = value, fill = genre)) +
-  geom_violin() +
-  scale_fill_viridis_d() +
-  labs(x = "Spotify Timbre Coefficients", y = "", fill = "Genre")
-
 ```
 
 
