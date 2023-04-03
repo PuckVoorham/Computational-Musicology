@@ -146,6 +146,7 @@ Energy
 
 ---
 
+Then, if we zoom in on 'energy', a feature that can measure the intensity of a song and how active it is, seems to support the hypothesis. As the histograms show, Songs from before currents have a significantly higher average energy level (nearly 1.0), compared to songs after currents (around 0.75). 
 
 
 ### Loudness as a third important characteristic
@@ -167,7 +168,7 @@ plot_ly() %>%
 
 ---
 
-hfkhkanjbgkbnsjkBajkjv
+Based on the energy-values and the first plot of this storyboard, we would expect that the volume of the later songs will also be lower than before. When zooming in on this feature, this turns out not to be the case: the figure clearly shows how, on average, the songs, written after currents are louder. With this we could say that 'loudness' does not necessarily follow from a higher energy-value and that my expectation is therefore not entirely correct. This is good to realize before we do the rest of the analyses.
 
 
 
@@ -302,6 +303,7 @@ Column {data-width=500}
 -------------------------------------
 
 ### text 
+
 ```{=html}
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6wcBZjhU4dk813FYE1hybg?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 ```
@@ -316,7 +318,7 @@ The second ceptrogram shows that the song starts almost right away at a high vol
 The interesting thing about these visualizations is that, although timbre features 1 and 2 are clearly visible in both, in the first ceptrogram you can see how the contrast gradually alternates between the first and the second, while in the second visualization it seems to be quite constant, with a single moment that pops out. This could be an example of how a pop-influenced song compares to somewhat more surprising, unexpected, and contrasting psychedelic rock characteristics.
 
 
-Self similarity matrices
+Self similarity matrices - ceptrogram
 =====================================
 
 Column {data-width=500}
@@ -324,15 +326,17 @@ Column {data-width=500}
 
 posthumous forgiveness 
 
-Column {data-width=500}
+Column {.tabset}
 -------------------------------------
 
-### Self similarity matrix: ceptogram
+### SSM 1: Sollitude is Bliss
 
 ```{r self similarity matrix}
-SSM <- readRDS(file = "data/SSM (SSM).RDS")
 
-SSM |>
+
+SSM_1 <- readRDS(file = "data/SSM_1 (SSM).RDS")
+
+SSM_1 |>
   compmus_self_similarity(timbre, "cosine") |> 
   ggplot(
     aes(
@@ -350,17 +354,62 @@ SSM |>
   labs(x = "", y = "")
 ```
 
+
+### SSM 2: The Less I Know The Better
+
+```{r}
+SSM_2 <- readRDS(file = "data/SSM_2 (SSM).RDS")
+
+SSM_2 |>
+  compmus_self_similarity(timbre, "cosine") |> 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+
+```
+
+
+### SSM 3: Posthumuous Forgiveness
+
+```{r}
+
+SSM_3 <- readRDS(file = "data/SSM_3 (SSM).RDS")
+
+SSM_3 |>
+  compmus_self_similarity(timbre, "cosine") |> 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+
 Tempograms
 =====================================
 
-Column {data-width=400}
--------------------------------------
-    
-### Tempo shifts as an indication of accessibility of music 
-    
-To analyze tempo, I used two typical songs from the different groups in my corpus. The first tempogram shows a number from before currents and the second shows one from after currents. It is interesting to note that the songs from before currents show more tempo changes than the songs after. Tempo changes could affect the extent to which a song can be considered accessible and danceable. The decrease in tempo changes in songs after currents could support the hypothesis. 
-   
-Column {data-width=600}
+
+Column {.tabset}
 -------------------------------------
 
 ### Tempogram 1: elephant
@@ -377,6 +426,7 @@ elephant_cyclic |>
 ```
 
 ### Tempogram 2: borderline
+
 ```{r}
 borderline_cyclic <- readRDS(file = "data/borderline_cyclic (Tempogram).RDS")
 
@@ -389,6 +439,14 @@ borderline_cyclic |>
 
 ```
 
+
+
+Column {data-width=350}
+-------------------------------------
+    
+### Tempo shifts as an indication of accessibility of music 
+    
+To analyze tempo, I used two typical songs from the different groups in my corpus. The first tempogram shows a number from before currents and the second shows one from after currents. It is interesting to note that the songs from before currents show more tempo changes than the songs after. Tempo changes could affect the extent to which a song can be considered accessible and danceable. The decrease in tempo changes in songs after currents could support the hypothesis. 
 
 
 Track level summary
@@ -473,7 +531,7 @@ data_for_tame_impala_clustering |>
 The odd one out: Gossip
 =====================================
 
-Column {data-width=350}
+Column {data-width=250}
 -------------------------------------
 
 ### An interesting outlier
@@ -481,10 +539,11 @@ Column {data-width=350}
 As mentioned earlier, it was expected that GOssip would not fall completely within the rest. At first I thought this would be purely due to the absence of text (which of course contributes to this), but also when we look at other features we see a striking result. Take an example of this chordogram: it actually shows a constant presence of a number of chords, which are also played simultaneously. This fits very well with the 'ambient' style I mentioned earlier, where the whole piece is actually a continuous succession of tones.
 
 
-Column {data-width=650}
+Column {data-width=750}
 -------------------------------------
 
 ### Chordogram 
+
 ```{r}
 circshift <- function(v, n) {
   if (n == 0) v else c(tail(v, n), head(v, -n))
